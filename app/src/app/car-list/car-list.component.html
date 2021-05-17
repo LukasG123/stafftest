@@ -1,0 +1,40 @@
+<div *ngIf="loading" class="fa-4x text-center">
+  <i class="fas fa-spinner fa-spin"></i>
+</div>
+<div *mgIf="!loading">
+  <div *ngIf="error">{{ error }}</div>
+    <div *ngIf="!error && cars.length">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>
+              <select (change)="filterValues('name', $event.target.value)"
+                class="form-control">
+                <option value="-">Name</option>
+                <option *ngFor="let filter of filters.name"
+                value="{{ filter }}">{{ filter }}</option>
+              </select>
+            </th>
+            <th>
+              <select (change)="filterValues('role', $event.target.value)"
+                class="form-control">
+                <option value="-">Role</option>
+                <option *ngFor="let filter of filters.role"
+                value="{{ filter }}">{{ filter }}</option>
+              </select>
+            </th>
+            <th>Email</th>
+            <th>phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of cars" [routerLink]="[car._id]">
+            <td>{{ car.name }}</td>
+            <td>{{ car.role }}</td>
+            <td>{{ car.email }}</td>
+            <td>{{ car.phone }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
